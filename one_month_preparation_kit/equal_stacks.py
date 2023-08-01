@@ -17,27 +17,25 @@ import sys
 #  3. INTEGER_ARRAY h3
 #
 
-def get_highest(h_lst):
-    return sorted(h_lst, key=sum)
-
-
-def check_equal(h_lst):
-    return sum(h_lst[0]) == sum(h_lst[1]) == sum(h_lst[2])
+def get_highest_idx(h_list):
+    highest = max(h_list)
+    return h_list.index(highest)
 
 
 def equalStacks(h1, h2, h3):
     # Write your code here
-    h_list = [h1, h2, h3]
-    # print(get_highest(h_list))
-    # print(check_equal(h_list))
+    stacks = [h1, h2, h3]
+    h_list = list(map(sum, stacks))
 
-    while not check_equal(h_list):
-        h_list = get_highest(h_list)
+    # print(h_list)
+    # print(get_highest_idx(h_list))
+
+    while not (h_list[0] == h_list[1] == h_list[2]):
+        i = get_highest_idx(h_list)
+        h_list[i] -= stacks[i].pop(0)
         # print(h_list)
-        h_list[2].pop(0)
-        # print(h_list[2])
 
-    return sum(h_list[2])
+    return h_list[0]
 
 
 if __name__ == '__main__':
